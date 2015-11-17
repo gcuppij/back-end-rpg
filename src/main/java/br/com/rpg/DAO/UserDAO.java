@@ -16,7 +16,10 @@ public class UserDAO extends AbstractDAO<UserDO> {
     }
 
     public UserDO find(Integer id) {
-        return new UserDO();
+        UserDO result = (UserDO) getCurrentSession().createQuery("from UserDO where id=:id").setParameter("id", id)
+                .uniqueResult();
+
+        return result;
     }
 
 }

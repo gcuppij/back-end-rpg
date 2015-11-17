@@ -6,9 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "item")
+@XmlRootElement
 public class ItemDO implements AbstractDO {
 
     private static final long serialVersionUID = -383668071513676088L;
@@ -29,6 +32,7 @@ public class ItemDO implements AbstractDO {
     @Column
     private String power;
 
+    @XmlElement
     public Integer getId() {
         return id;
     }
@@ -37,6 +41,7 @@ public class ItemDO implements AbstractDO {
         this.id = id;
     }
 
+    @XmlElement
     public Integer getRecordId() {
         return recordId;
     }
@@ -45,6 +50,7 @@ public class ItemDO implements AbstractDO {
         this.recordId = recordId;
     }
 
+    @XmlElement
     public String getName() {
         return name;
     }
@@ -53,6 +59,7 @@ public class ItemDO implements AbstractDO {
         this.name = name;
     }
 
+    @XmlElement
     public Integer getDamage() {
         return damage;
     }
@@ -61,6 +68,7 @@ public class ItemDO implements AbstractDO {
         this.damage = damage;
     }
 
+    @XmlElement
     public String getPower() {
         return power;
     }

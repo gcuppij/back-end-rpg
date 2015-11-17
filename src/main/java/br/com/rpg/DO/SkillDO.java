@@ -6,9 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "skill")
+@XmlRootElement
 public class SkillDO implements AbstractDO {
 
     private static final long serialVersionUID = -3621154285517854143L;
@@ -26,10 +29,12 @@ public class SkillDO implements AbstractDO {
     @Column
     private Integer point;
 
+    @XmlElement
     public Integer getId() {
         return id;
     }
 
+    @XmlElement
     public Integer getRecordId() {
         return recordId;
     }
@@ -38,6 +43,7 @@ public class SkillDO implements AbstractDO {
         this.recordId = recordId;
     }
 
+    @XmlElement
     public String getName() {
         return name;
     }
@@ -46,6 +52,7 @@ public class SkillDO implements AbstractDO {
         this.name = name;
     }
 
+    @XmlElement
     public Integer getPoint() {
         return point;
     }

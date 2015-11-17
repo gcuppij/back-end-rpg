@@ -6,9 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "map")
+@XmlRootElement
 public class MapDO implements AbstractDO {
 
     private static final long serialVersionUID = 6173015484447762437L;
@@ -20,10 +23,12 @@ public class MapDO implements AbstractDO {
     @Column
     private String picture;
 
+    @XmlElement
     public Integer getId() {
         return id;
     }
 
+    @XmlElement
     public String getPicture() {
         return picture;
     }

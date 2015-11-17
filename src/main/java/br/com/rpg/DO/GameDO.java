@@ -6,11 +6,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "game")
+@XmlRootElement
 public class GameDO implements AbstractDO {
 
     private static final long serialVersionUID = -823333315035140897L;
@@ -35,10 +38,12 @@ public class GameDO implements AbstractDO {
     @Column
     private String token;
 
+    @XmlElement
     public Integer getId() {
         return id;
     }
 
+    @XmlElement
     public String getName() {
         return name;
     }
@@ -47,6 +52,7 @@ public class GameDO implements AbstractDO {
         this.name = name;
     }
 
+    @XmlElement
     public String getDescription() {
         return description;
     }
@@ -55,6 +61,7 @@ public class GameDO implements AbstractDO {
         this.description = description;
     }
 
+    @XmlElement
     public Integer getUserId() {
         return userId;
     }
@@ -63,6 +70,7 @@ public class GameDO implements AbstractDO {
         this.userId = userId;
     }
 
+    @XmlElement
     public Integer getMapId() {
         return mapId;
     }
@@ -75,6 +83,7 @@ public class GameDO implements AbstractDO {
         this.id = id;
     }
 
+    @XmlElement
     public String getToken() {
         return token;
     }

@@ -6,9 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "country")
+@XmlRootElement
 public class CountryDO implements AbstractDO {
 
     private static final long serialVersionUID = 8598191451129589866L;
@@ -23,6 +26,7 @@ public class CountryDO implements AbstractDO {
     @Column
     private String image;
 
+    @XmlElement
     public Integer getId() {
         return id;
     }
@@ -31,6 +35,7 @@ public class CountryDO implements AbstractDO {
         this.id = id;
     }
 
+    @XmlElement
     public String getName() {
         return name;
     }
@@ -39,6 +44,7 @@ public class CountryDO implements AbstractDO {
         this.name = name;
     }
 
+    @XmlElement
     public String getImage() {
         return image;
     }

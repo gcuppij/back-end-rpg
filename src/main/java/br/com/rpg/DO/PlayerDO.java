@@ -6,9 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "player")
+@XmlRootElement
 public class PlayerDO implements AbstractDO {
 
     private static final long serialVersionUID = -5608512093361227877L;
@@ -32,6 +35,7 @@ public class PlayerDO implements AbstractDO {
     @Column
     private Integer gameId;
 
+    @XmlElement
     public Integer getId() {
         return id;
     }
@@ -44,6 +48,7 @@ public class PlayerDO implements AbstractDO {
         this.recordId = recordId;
     }
 
+    @XmlElement
     public String getName() {
         return name;
     }
@@ -52,6 +57,7 @@ public class PlayerDO implements AbstractDO {
         this.name = name;
     }
 
+    @XmlElement
     public Integer getAge() {
         return age;
     }
@@ -60,6 +66,7 @@ public class PlayerDO implements AbstractDO {
         this.age = age;
     }
 
+    @XmlElement
     public Integer getUserId() {
         return userId;
     }
@@ -68,6 +75,7 @@ public class PlayerDO implements AbstractDO {
         this.userId = userId;
     }
 
+    @XmlElement
     public Integer getGameId() {
         return gameId;
     }

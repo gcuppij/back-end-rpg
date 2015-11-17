@@ -6,9 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "race")
+@XmlRootElement
 public class RaceDO implements AbstractDO {
 
     private static final long serialVersionUID = 5784059310905674157L;
@@ -23,6 +26,7 @@ public class RaceDO implements AbstractDO {
     @Column
     private String bonus;
 
+    @XmlElement
     public String getName() {
         return name;
     }
@@ -31,6 +35,7 @@ public class RaceDO implements AbstractDO {
         this.name = name;
     }
 
+    @XmlElement
     public String getBonus() {
         return bonus;
     }
@@ -39,6 +44,7 @@ public class RaceDO implements AbstractDO {
         this.bonus = bonus;
     }
 
+    @XmlElement
     public Integer getId() {
         return id;
     }

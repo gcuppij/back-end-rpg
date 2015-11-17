@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 
 import br.com.rpg.DAO.UserDAO;
 import br.com.rpg.DO.UserDO;
+import br.com.rpg.utils.UserUtils;
 
 @Named
 @Path("/user")
@@ -32,7 +33,7 @@ public class UserService {
         try {
             UserDO newUser = new UserDO();
             newUser.setName(userName);
-            newUser.setPassword(password);
+            newUser.setPassword(UserUtils.generateMD5(userName + password));
             newUser.setCountryId(countryId);
             Integer userId = userDAO.save(newUser);
             return Response.status(Response.Status.CREATED).entity(userId).build();

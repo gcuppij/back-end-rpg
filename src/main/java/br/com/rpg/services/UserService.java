@@ -58,4 +58,18 @@ public class UserService {
         }
     }
 
+    @GET
+    @Path("{userName}/{password}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response auth(@PathParam("userName") String userName, @PathParam("password") String password) {
+        try {
+            logger.info("Recuperando usuário " + userName + " para autenticação");
+            UserDO find = userDAO.findUserAndPassword(userName, password);
+            return Response.status(Response.Status.OK).entity(find).build();
+        } catch (Exception e) {
+            logger.error("Erro ao recuperar usuário " + userName + ". " + e.getMessage(), e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro ao recuperar usuário").build();
+        }
+    }
+
 }

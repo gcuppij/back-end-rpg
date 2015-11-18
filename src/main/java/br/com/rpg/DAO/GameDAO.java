@@ -1,6 +1,6 @@
 package br.com.rpg.DAO;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.inject.Named;
 
@@ -24,8 +24,8 @@ public class GameDAO extends AbstractDAO<GameDO> {
     }
 
     @SuppressWarnings("unchecked")
-    public List<GameDO> findAll(Integer userId) {
-        List<GameDO> result = (List<GameDO>) getCurrentSession().createQuery("from GameDO where userId=:userId")
+    public ArrayList<GameDO> findAll(Integer userId) {
+        ArrayList<GameDO> result = (ArrayList<GameDO>) getCurrentSession().createQuery("from GameDO where userId=:userId")
                 .setParameter("userId", userId).list();
 
         return result;

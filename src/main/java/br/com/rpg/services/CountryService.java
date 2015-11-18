@@ -7,6 +7,7 @@ import javax.inject.Named;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -25,7 +26,9 @@ public class CountryService {
     public Response getCountries() {
         try {
             ArrayList<CountryDO> countries = countryDAO.findAll();
-            return Response.status(Response.Status.OK).entity(countries).build();
+            GenericEntity<ArrayList<CountryDO>> entity = new GenericEntity<ArrayList<CountryDO>>(countries) {
+            };
+            return Response.status(Response.Status.OK).entity(entity).build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro ao recuperar paises").build();
         }

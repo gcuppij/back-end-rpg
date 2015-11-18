@@ -2,7 +2,7 @@ package br.com.rpg.services;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.ws.rs.FormParam;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 
 import br.com.rpg.DAO.UserDAO;
 import br.com.rpg.DO.UserDO;
+import br.com.rpg.services.beans.UserBean;
 import br.com.rpg.utils.UserUtils;
 
 @Named
@@ -27,18 +28,18 @@ public class UserService {
     private UserDAO userDAO;
 
     @POST
-    public Response post(@FormParam("username") String userName, @FormParam("password") String password,
-            @FormParam("countryid") Integer countryId) {
-        logger.info("Salvando novo usuário " + userName + " do país " + countryId);
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response post(UserBean userBean) {
+        logger.info("Criando novo usuário. " + userBean);
         try {
             UserDO newUser = new UserDO();
-            newUser.setName(userName);
-            newUser.setPassword(UserUtils.generateMD5(userName + password));
-            newUser.setCountryId(countryId);
+            newUser.setName(userBean.getUserName());
+            newUser.setPassword(UserUtils.generateMD5(userBean.getUserName() + userBean.getPassword()));
+            newUser.setCountryId(userBean.getCountryId());
             Integer userId = userDAO.save(newUser);
             return Response.status(Response.Status.CREATED).entity(userId).build();
         } catch (Exception e) {
-            logger.error("Erro ao salvar usuário " + userName + ". " + e.getMessage(), e);
+            logger.error("Erro ao criar usuário " + userBean.getUserName() + ". " + e.getMessage(), e);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro ao criar usuário").build();
         }
     }
@@ -48,7 +49,7 @@ public class UserService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response get(@PathParam("userId") Integer userId) {
         try {
-            logger.info("Recuperando usuário com ID " + userId);
+            logger.info("Recuperando usuário " + userId);
             UserDO find = userDAO.find(userId);
             return Response.status(Response.Status.OK).entity(find).build();
         } catch (Exception e) {

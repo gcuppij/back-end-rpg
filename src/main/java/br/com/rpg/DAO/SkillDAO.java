@@ -16,4 +16,8 @@ public class SkillDAO extends AbstractDAO<SkillDO> {
 
         return result;
     }
+
+    public void delete(Integer id) {
+        getCurrentSession().createSQLQuery("delete from skill where id = " + id).executeUpdate();
+    }
 }

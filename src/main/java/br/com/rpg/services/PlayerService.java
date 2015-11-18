@@ -21,7 +21,6 @@ import org.apache.log4j.Logger;
 
 import br.com.rpg.DAO.GameDAO;
 import br.com.rpg.DAO.PlayerDAO;
-import br.com.rpg.DAO.RecordDAO;
 import br.com.rpg.DO.GameDO;
 import br.com.rpg.DO.PlayerDO;
 import br.com.rpg.services.beans.PlayerBean;
@@ -37,8 +36,6 @@ public class PlayerService {
 
     @Inject
     private GameDAO gameDAO;
-    
-    @Inject RecordDAO recordDAO;
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)

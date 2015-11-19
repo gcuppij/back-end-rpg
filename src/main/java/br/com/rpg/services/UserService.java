@@ -32,9 +32,14 @@ public class UserService {
     public Response post(UserBean userBean) {
         logger.info("Criando novo usuário. " + userBean);
         try {
+            UserDO find = userDAO.findUserAndPassword(userBean.getUserName(),
+                    UserUtils.generatePassword(userBean.getUserName(), userBean.getPassword()));
+            if(find != null) {
+                return Response.status(Response.Status.BAD_REQUEST).entity("Usuário já existe").build();
+            }
             UserDO newUser = new UserDO();
             newUser.setName(userBean.getUserName());
-            newUser.setPassword(UserUtils.generateMD5(userBean.getUserName() + userBean.getPassword()));
+            newUser.setPassword(UserUtils.generatePassword(userBean.getUserName(), userBean.getPassword()));
             newUser.setCountryId(userBean.getCountryId());
             Integer userId = userDAO.save(newUser);
             return Response.status(Response.Status.CREATED).entity(userId).build();
@@ -64,7 +69,7 @@ public class UserService {
     public Response auth(@PathParam("userName") String userName, @PathParam("password") String password) {
         try {
             logger.info("Recuperando usuário " + userName + " para autenticação");
-            UserDO find = userDAO.findUserAndPassword(userName, password);
+            UserDO find = userDAO.findUserAndPassword(userName, UserUtils.generatePassword(userName, password));
             return Response.status(Response.Status.OK).entity(find).build();
         } catch (Exception e) {
             logger.error("Erro ao recuperar usuário " + userName + ". " + e.getMessage(), e);

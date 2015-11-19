@@ -24,14 +24,21 @@ public class UserTest {
     private UserService service;
     
     @Test
-    public void post() throws Exception {
+    public void postOk() throws Exception {
         Response post = service.post(TestUtils.userBean());
         assertEquals(post.getStatus(), 201);
     }
     
     @Test
-    public void get() throws Exception {
+    public void getOk() throws Exception {
         Response get = service.get(TestUtils.USER_ID);
+        assertEquals(get.getStatus(), 200);
+        assertNotNull(get.getEntity());
+    }
+    
+    @Test
+    public void authOk() throws Exception {
+        Response get = service.auth(TestUtils.USER_LOGIN, TestUtils.USER_PASSWORD);
         assertEquals(get.getStatus(), 200);
         assertNotNull(get.getEntity());
     }
